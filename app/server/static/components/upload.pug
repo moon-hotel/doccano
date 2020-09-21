@@ -4,10 +4,10 @@ div.columns(v-cloak="")
 
     div.card
       header.card-header
-        p.card-header-title File Uploader
+        p.card-header-title 文件上传
 
       div.card-content
-        h2.subtitle Upload a file to annotate text.
+        h2.subtitle 请上传需要标注的文件.
 
         div.control(style="margin-bottom: 1em;")
           block select-format-area
@@ -29,7 +29,7 @@ div.columns(v-cloak="")
                 span.file-cta.button(v-bind:class="{'is-loading': isLoading}")
                   span.file-icon
                     i.fas.fa-upload
-                  span.file-label Select a file…
+                  span.file-label 选择文件…
                 span.file-name {{ file.name }}
 
           div.control(v-if="canUploadFromCloud")

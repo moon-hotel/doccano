@@ -304,7 +304,7 @@ export default {
 
       return this.documentAnnotationsAreApproved
         ? `Annotations approved by ${document.annotation_approver}, click to reject annotations`
-        : 'Click to approve annotations';
+        : '点击通过标注';
     },
 
     documentMetadata() {

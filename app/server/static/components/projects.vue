@@ -9,36 +9,36 @@
             h2.subtitle.is-4.has-text-white I hope you are having a great day!
 
             p(v-if="isSuperuser")
-              a.button.is-medium.is-primary(v-on:click="isActive = !isActive") Create Project
+              a.button.is-medium.is-primary(v-on:click="isActive = !isActive") 创建项目
 
     div.modal(v-bind:class="{ 'is-active': isActive }")
       div.modal-background
       div.modal-card
         header.modal-card-head
-          p.modal-card-title Create Project
+          p.modal-card-title 创建项目
           button.delete(aria-label="close", v-on:click="isActive = !isActive")
 
         section.modal-card-body
           div.field
-            label.label Project Name
+            label.label 项目名称
             div.control
-              input.input(v-model="projectName", type="text", required, placeholder="Project name")
+              input.input(v-model="projectName", type="text", required, placeholder="项目名称")
             p.help.is-danger {{ projectNameError }}
 
           div.field
-            label.label Description
+            label.label 项目描述
             div.control
-              textarea.textarea(v-model="description", required, placeholder="Project description")
+              textarea.textarea(v-model="description", required, placeholder="项目描述")
             p.help.is-danger {{ descriptionError }}
 
           div.field
-            label.label Project Type
+            label.label 项目类型
 
             div.control
               select(v-model="projectType", name="project_type", required)
                 option(value="", selected="selected") ---------
-                option(value="DocumentClassification") document classification
-                option(value="SequenceLabeling") sequence labeling
+                option(value="DocumentClassification") 文本分类
+                option(value="SequenceLabeling") 序列标注
                 option(value="Seq2seq") sequence to sequence
                 option(value="Speech2text") speech to text
             p.help.is-danger {{ projectTypeError }}
@@ -52,7 +52,7 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | Randomize document order per user
+              | 打乱样本顺序（每个标注员分配到的样本数量相同但顺序不同）
 
           div.field
             label.checkbox
@@ -63,7 +63,7 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | Share annotations across all users
+              | 共享标注结果（标注结果可以共享且以最后一次的标注为准）
 
           div.field(v-if="projectType === 'DocumentClassification'")
             label.checkbox
@@ -74,22 +74,22 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | Single-class classification
+              | 单标签分类（每个样本仅允许有一个标签）
 
         footer.modal-card-foot.pt20.pb20.pr20.pl20.has-background-white-ter
-          button.button.is-primary(v-on:click="create()") Create
-          button.button(v-on:click="isActive = !isActive") Cancel
+          button.button.is-primary(v-on:click="create()") 创建
+          button.button(v-on:click="isActive = !isActive") 取消
 
     div.modal(v-bind:class="{ 'is-active': isDelete }")
       div.modal-background
       div.modal-card
         header.modal-card-head
-          p.modal-card-title Delete Project
+          p.modal-card-title 删除项目
           button.delete(aria-label="close", v-on:click="isDelete = !isDelete")
-        section.modal-card-body Are you sure you want to delete project?
+        section.modal-card-body 确定删除项目?
         footer.modal-card-foot.pt20.pb20.pr20.pl20.has-background-white-ter
-          button.button.is-danger(v-on:click="deleteProject()") Delete
-          button.button(v-on:click="isDelete = !isDelete") Cancel
+          button.button.is-danger(v-on:click="deleteProject()") 删除
+          button.button(v-on:click="isDelete = !isDelete") 取消
 
     section.hero
       div.container
@@ -97,15 +97,15 @@
           div.column.is-10.is-offset-1
             div.card.events-card
               header.card-header
-                p.card-header-title {{ items.length }} Projects
+                p.card-header-title {{ items.length }} 项目
 
                 div.field.card-header-icon
                   div.control
                     div.select
                       select(v-model="selected")
-                        option(selected) All Project
-                        option Text Classification
-                        option Sequence Labeling
+                        option(selected) 所有项目
+                        option 文本分类
+                        option 序列标注
                         option Seq2seq
                         option Speech to text
 
@@ -129,17 +129,18 @@
 
                             div.dataset-item__main-subtitle {{ project.description }}
                             div.dataset-item__main-info
-                              span.dataset-item__main-update updated
+                              span.dataset-item__main-update 更新
                                 span {{ project.updated_at | daysAgo }}
 
                         td.is-vertical
-                          span.tag.is-normal {{ project.project_type }}
+                          span.tag.is-normal {{ selectedProjectsType(project.project_type) }}
+                          // span.tag.is-normal {{ project.project_type+'dsfa' }}
 
                         td.is-vertical(v-if="isProjectAdmin.get(project.id)")
-                          a(v-bind:href="'/projects/' + project.id + '/docs'") Edit
+                          a(v-bind:href="'/projects/' + project.id + '/docs'") 编辑
 
                         td.is-vertical(v-if="isProjectAdmin.get(project.id)")
-                          a.has-text-danger(v-on:click="setProject(project)") Delete
+                          a.has-text-danger(v-on:click="setProject(project)") 删除
 </template>
 
 <script>
@@ -154,7 +155,7 @@ export default {
     isActive: false,
     isDelete: false,
     project: null,
-    selected: 'All Project',
+    selected: '所有项目',
     projectName: '',
     description: '',
     projectType: '',
@@ -171,7 +172,7 @@ export default {
 
   computed: {
     selectedProjects() {
-      return this.items.filter(item => this.selected === 'All Project' || this.matchType(item.project_type));
+      return this.items.filter(item => this.selected === '所有项目' || this.matchType(item.project_type));
     },
   },
 
@@ -203,13 +204,26 @@ export default {
       this.project = project;
       this.isDelete = true;
     },
-
-    matchType(projectType) {
+    selectedProjectsType(projectType) {
       if (projectType === 'DocumentClassification') {
-        return this.selected === 'Text Classification';
+        return '文本分类';
       }
       if (projectType === 'SequenceLabeling') {
-        return this.selected === 'Sequence Labeling';
+        return '序列标注';
+      }
+      if (projectType === 'Seq2seq') {
+        return 'Seq2seq';
+      }
+      if (projectType === 'Speech2text') {
+        return 'Speech to text';
+      }
+    },
+    matchType(projectType) {
+      if (projectType === 'DocumentClassification') {
+        return this.selected === '文本分类';
+      }
+      if (projectType === 'SequenceLabeling') {
+        return this.selected === '序列标注';
       }
       if (projectType === 'Seq2seq') {
         return this.selected === 'Seq2seq';
@@ -228,7 +242,7 @@ export default {
         single_class_classification: this.singleClassClassification,
         randomize_document_order: this.randomizeDocumentOrder,
         collaborative_annotation: this.collaborativeAnnotation,
-        guideline: 'Please write annotation guideline.',
+        guideline: '请输入标记指南',
         resourcetype: this.resourceType(),
       };
       defaultHttpClient.post('/v1/projects', payload)

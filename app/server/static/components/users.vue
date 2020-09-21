@@ -2,19 +2,19 @@
   div.user-table
     div.columns.is-multiline
       div.column.is-12
-        a.button.is-primary(v-on:click="createNewRoleMapping()") Add Existing User
+        a.button.is-primary(v-on:click="createNewRoleMapping()") 添加标注人员
 
       div.column.is-12(v-if="newRoleMapping")
         div.box
           div.columns.is-multiline
             div.column
               b-field(
-                label="User Name"
+                label="人员名称"
                 v-bind:type="{ 'is-danger': getAddUserMessage }"
                 v-bind:message="getAddUserMessage"
               )
                 b-select(
-                  placeholder="e.g. Anne"
+                  placeholder="e.g. 张三"
                   v-model="newRoleMapping.username"
                   v-on:input="option => {checkValidExistingUser(option);\
                     newRoleMapping.userid = option}"
@@ -23,9 +23,9 @@
                     | {{ otherUser.username }}
 
             div.column
-              b-field(label="Role")
+              b-field(label="人员角色")
                 b-select(
-                  placeholder="Select a role"
+                  placeholder="选择一种角色"
                   v-model="newRoleMapping.roleid"
                 )
                   option(v-for="role in roles", v-bind:value="role.id", v-bind:key="role.id")
@@ -35,20 +35,20 @@
                 label.label &nbsp;
                 div.field.is-grouped
                   p.control
-                    b-button(type="is-light", v-on:click="cancelCreate()") Cancel
+                    b-button(type="is-light", v-on:click="cancelCreate()") 取消
 
                   p.control
                     b-button(
                       type="is-primary"
                       v-on:click="addRoleMapping()"
                       v-bind:disabled="isDisabled"
-                    ) Add User
+                    ) 添加
     div.card
       b-table(v-bind:data="roleMappings", icon-pack="fas", default-sort="username", striped=true)
         template(slot-scope="props")
-          b-table-column(field="username", label="User Name", sortable="")
+          b-table-column(field="username", label="人员名称", sortable="")
             | {{ props.row.username }}
-          b-table-column(field="rolename", label="Role", sortable="")
+          b-table-column(field="rolename", label="人员角色", sortable="")
             b-dropdown(aria-role="list")
               button.button.is-primary(slot="trigger")
                 span {{ props.row.rolename }}
@@ -60,11 +60,11 @@
                 v-on:click="switchRole(props.row.user, otherRole.id)"
               )
                 | {{ otherRole.name }}
-          b-table-column(label="Action")
+          b-table-column(label="行为")
             a.button.is-text(v-on:click="removeRoleMapping(props.row.id)")
               span.icon.is-small
                 i.fas.fa-trash
-              span Delete
+              span 删除
 </template>
 
 <style>
@@ -111,7 +111,7 @@ export default {
         return 'Not an exsiting user!';
       }
       if (!this.otherUsers.length) {
-        return 'No other users left to add!';
+        return '没有人员可供添加，请先添加新的用户！';
       }
       return null;
     },

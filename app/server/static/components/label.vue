@@ -4,7 +4,7 @@
 
     div.columns.is-multiline
       div.column.is-12
-        a.button.is-primary(v-on:click="createLabel()") New label
+        a.button.is-primary(v-on:click="createLabel()") 新建标签
 
       div.column.is-12(v-if="newLabel")
         div.box
@@ -21,17 +21,17 @@
 
             div.column
               div.field
-                label.label Label name
+                label.label 标签名称
                 div.control
                   input.input(
                     type="text"
-                    placeholder="Text input"
+                    placeholder="输入标签"
                     v-model="newLabel.text"
                   )
 
             div.column
               div.field
-                label.label Shortcut
+                label.label 快捷键
                 div.field.has-addons
                   p.control
                     span.select
@@ -49,7 +49,7 @@
 
             div.column
               div.field
-                label.label Color
+                label.label 选择颜色
                 div.field.has-addons
                   div.control
                     div.form__field
@@ -73,14 +73,14 @@
                 label.label &nbsp;
                 div.field.is-grouped
                   p.control
-                    a.button.is-light(v-on:click="cancelCreate()") Cancel
+                    a.button.is-light(v-on:click="cancelCreate()") 取消
 
                   p.control
-                    a.button.is-primary(v-on:click="addLabel()") Create label
+                    a.button.is-primary(v-on:click="addLabel()") 创建标签
 
     div.card
       header.card-header
-        p.card-header-title {{ labels.length }} labels
+        p.card-header-title {{ labels.length }} 标签
 
         a.card-header-icon(href="#", aria-label="more options")
           span.icon
@@ -108,28 +108,28 @@
                     a.button.is-text(v-on:click="editLabel(label)")
                       span.icon.is-small
                         i.fas.fa-pencil-alt
-                      span Edit
+                      span 编辑
 
                   p.control
                     a.button.is-text(v-on:click="removeLabel(label)")
                       span.icon.is-small
                         i.fas.fa-trash
-                      span Delete
+                      span 删除
 
           div.columns(v-show="label === editedLabel")
             div.column
               div.field
-                label.label Label name
+                label.label 标签名称
                 div.control
                   input.input(
                     type="text"
-                    placeholder="Text input"
+                    placeholder="输入标签"
                     v-model="label.text"
                   )
 
             div.column
               div.field
-                label.label Shortcut
+                label.label 快捷键
                 div.field.has-addons
                   p.control
                     span.select
@@ -147,7 +147,7 @@
 
             div.column
               div.field
-                label.label Color
+                label.label 选择颜色
                 div.field.has-addons
                   div.control
                     div.form__field
@@ -171,10 +171,10 @@
                 label.label &nbsp;
                 div.field.is-grouped
                   p.control
-                    a.button.is-light(v-on:click="cancelEdit(label)") Cancel
+                    a.button.is-light(v-on:click="cancelEdit(label)") 取消
 
                   p.control
-                    a.button.is-primary(v-on:click="doneEdit(label)") Save changes
+                    a.button.is-primary(v-on:click="doneEdit(label)") 保存更改
 </template>
 
 <style scoped>
@@ -269,7 +269,7 @@ export default {
               this.messages.push(msg);
             });
           } else {
-            this.messages.push('You cannot use same label name or shortcut key.');
+            this.messages.push('已存在相同名称的标签或快捷键');
           }
         });
     },
@@ -323,7 +323,7 @@ export default {
               this.messages.push(msg);
             });
           } else {
-            this.messages.push('You cannot use same label name or shortcut key.');
+            this.messages.push('已存在相同名称的标签或快捷键');
           }
         });
     },

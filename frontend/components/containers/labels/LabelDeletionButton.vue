@@ -6,7 +6,7 @@
       outlined
       @click="dialog=true"
     >
-      Delete
+      删除
     </v-btn>
     <v-dialog
       v-model="dialog"

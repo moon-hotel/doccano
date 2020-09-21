@@ -23,5 +23,5 @@ export function daysAgo(dateStr) {
 
   return daysDiff === 1
     ? `${daysDiff} day ago`
-    : `${daysDiff} days ago`;
+    : `${daysDiff} 天前`;
 }

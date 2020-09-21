@@ -5,7 +5,7 @@
         div.card
 
           header.card-header
-            p.card-header-title Label stats
+            p.card-header-title 标注统计
             a.card-header-icon(href="#", aria-label="more options")
               span.icon
                 i.fas.fa-angle-down(aria-hidden="true")
@@ -14,7 +14,7 @@
             div.column.is-8
               line-chart(v-bind:chart-data="labelData")
             div.column.is-4
-              h2.subtitle Annotation Progress
+              h2.subtitle 标注情况
               doughnut-chart(v-bind:chart-data="progressData")
 
     div.columns
@@ -22,7 +22,7 @@
         div.card
 
           header.card-header
-            p.card-header-title User stats
+            p.card-header-title 人员统计
             a.card-header-icon(href="#", aria-label="more options")
               span.icon
                 i.fas.fa-angle-down(aria-hidden="true")
@@ -106,8 +106,8 @@ export default {
 
   created() {
     HTTP.get('statistics').then((response) => {
-      this.labelData = this.makeData(response.data.label, 'Label stats');
-      this.userData = this.makeData(response.data.user, 'User stats');
+      this.labelData = this.makeData(response.data.label, '类别统计');
+      this.userData = this.makeData(response.data.user, '标注统计');
       const complete = response.data.total - response.data.remaining;
       const incomplete = response.data.remaining;
       this.progressData = {
@@ -117,8 +117,8 @@ export default {
         }],
 
         labels: [
-          'Completed',
-          'Incomplete',
+          '已完成',
+          '未完成',
         ],
       };
     });

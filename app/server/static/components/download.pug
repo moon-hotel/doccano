@@ -5,10 +5,10 @@ div.columns(v-cloak="")
     div.card
 
       header.card-header
-        p.card-header-title File Downloader
+        p.card-header-title 数据下载
 
       div.card-content
-        h2.subtitle Download labeled data
+        h2.subtitle 下载已标注数据
 
         div.control(style="margin-bottom: 1em;")
           block select-format-area
@@ -20,4 +20,4 @@ div.columns(v-cloak="")
           type="submit"
           v-on:click="download()"
           v-bind:class="{'is-loading': isLoading}"
-        ) Download
+        ) 下载

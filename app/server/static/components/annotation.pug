@@ -9,7 +9,7 @@ div.columns(v-cloak="")
               v-model="searchQuery"
               v-on:keyup.enter="submit"
               type="text"
-              placeholder="Search document"
+              placeholder="搜索文档"
               style="border-right: none; box-shadow: none; -webkit-box-shadow: none;"
             )
 
@@ -34,7 +34,7 @@ div.columns(v-cloak="")
                         value="all"
                         checked=""
                       )
-                      | All
+                      | 所有
                   a.dropdown-item
                     label.radio
                       input(
@@ -42,7 +42,7 @@ div.columns(v-cloak="")
                         type="radio"
                         value="active"
                       )
-                      | Active
+                      | 未标注
                   a.dropdown-item
                     label.radio
                       input(
@@ -50,19 +50,19 @@ div.columns(v-cloak="")
                         type="radio"
                         value="completed"
                       )
-                      | Completed
+                      | 已标注
 
       div.main.pt0.pb0.pr20.pl20
-        span About {{ count }} results (page {{ paginationPage }} of {{ paginationPages }})
+        span 总共 {{ count }} 条记录 (page {{ paginationPage }} of {{ paginationPages }})
 
       div.main.pt0.pb0.pr20.pl20
         div.select
           select(v-model="ordering")
-            option(value="", disabled, selected) Sort by
-            option(value="created_at") Created : Ascending
-            option(value="-created_at") Created : Descending
-            option(value="updated_at") Updated : Ascending
-            option(value="-updated_at") Updated : Descending
+            option(value="", disabled, selected) 排序
+            option(value="created_at") 创建时间升序
+            option(value="-created_at") 创建时间降序
+            option(value="updated_at") 更新时间升序
+            option(value="-updated_at") 更新时间降序
 
       div.main.sidebar-scrollable
         a.item(
@@ -85,7 +85,7 @@ div.columns(v-cloak="")
       div.modal-background
       div.modal-card
         header.modal-card-head
-          p.modal-card-title Annotation Guideline
+          p.modal-card-title 标注指南
           button.delete(
             v-on:click="isAnnotationGuidelineActive = !isAnnotationGuidelineActive"
             aria-label="close"
@@ -160,7 +160,7 @@ div.columns(v-cloak="")
             v-on:click="prevPagination"
             v-on:shortkey="prevPagination"
           )
-            span.icon.tooltip(data-tooltip="Previous page")
+            span.icon.tooltip(data-tooltip="上一页")
               i.fas.fa-arrow-left
 
           a.button(
@@ -168,7 +168,7 @@ div.columns(v-cloak="")
             v-on:click="prevPage"
             v-on:shortkey="prevPage"
           )
-            span.icon.tooltip(data-tooltip="Previous document")
+            span.icon.tooltip(data-tooltip="上一条")
               i.fas.fa-chevron-left
 
       div.level-center
@@ -181,7 +181,7 @@ div.columns(v-cloak="")
             v-on:click="nextPage"
             v-on:shortkey="nextPage"
           )
-            span.icon.tooltip(data-tooltip="Next document")
+            span.icon.tooltip(data-tooltip="下一条")
               i.fas.fa-chevron-right
 
           a.button(
@@ -189,5 +189,5 @@ div.columns(v-cloak="")
             v-on:click="nextPagination"
             v-on:shortkey="nextPagination"
           )
-            span.icon.tooltip(data-tooltip="Next page")
+            span.icon.tooltip(data-tooltip="下一页")
               i.fas.fa-arrow-right

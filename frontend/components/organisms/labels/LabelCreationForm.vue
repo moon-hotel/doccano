@@ -19,7 +19,7 @@
           dismissible
         >
           The label could not be created.
-          You cannot use same label name or shortcut key.
+          已存在相同名称的标签或快捷键
         </v-alert>
         <v-text-field
           v-model="labelName"

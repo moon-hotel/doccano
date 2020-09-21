@@ -3,7 +3,7 @@
         "id": 1,
         "name": "CoNLL 2003",
         "description": "This is a project for NER.",
-        "guideline": "Please write annotation guideline.",
+        "guideline": "请输入标记操作指南！",
         "users": [
             1
         ],
