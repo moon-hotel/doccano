@@ -9,34 +9,34 @@
             h2.subtitle.is-4.has-text-white I hope you are having a great day!
 
             p(v-if="isSuperuser")
-              a.button.is-medium.is-primary(v-on:click="isActive = !isActive") 创建项目
+              a.button.is-medium.is-primary(v-on:click="isActive = !isActive") 创建工程
 
     div.modal(v-bind:class="{ 'is-active': isActive }")
       div.modal-background
       div.modal-card
         header.modal-card-head
-          p.modal-card-title 创建项目
+          p.modal-card-title 创建工程
           button.delete(aria-label="close", v-on:click="isActive = !isActive")
 
         section.modal-card-body
           div.field
-            label.label 项目名称
+            label.label 工程名称
             div.control
-              input.input(v-model="projectName", type="text", required, placeholder="项目名称")
+              input.input(v-model="projectName", type="text", required, placeholder="工程名称")
             p.help.is-danger {{ projectNameError }}
 
           div.field
-            label.label 项目描述
+            label.label 工程描述
             div.control
-              textarea.textarea(v-model="description", required, placeholder="项目描述")
+              textarea.textarea(v-model="description", required, placeholder="工程描述")
             p.help.is-danger {{ descriptionError }}
 
           div.field
-            label.label 项目类型
+            label.label 工程类型
 
             div.control
               select(v-model="projectType", name="project_type", required)
-                option(value="", selected="selected") ---------
+                option(value="", selected="selected") 选择任务
                 option(value="DocumentClassification") 文本分类
                 option(value="SequenceLabeling") 序列标注
                 option(value="Seq2seq") sequence to sequence
@@ -52,7 +52,7 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | 打乱样本顺序（每个标注员分配到的样本数量相同但顺序不同）
+              | 打乱样本顺序
 
           div.field
             label.checkbox
@@ -63,7 +63,7 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | 共享标注结果（标注结果可以共享且以最后一次的标注为准）
+              | 共享标注结果
 
           div.field(v-if="projectType === 'DocumentClassification'")
             label.checkbox
@@ -74,7 +74,7 @@
                 style="margin-right: 0.25em;"
                 required
               )
-              | 单标签分类（每个样本仅允许有一个标签）
+              | 单标签分类
 
         footer.modal-card-foot.pt20.pb20.pr20.pl20.has-background-white-ter
           button.button.is-primary(v-on:click="create()") 创建
@@ -84,9 +84,9 @@
       div.modal-background
       div.modal-card
         header.modal-card-head
-          p.modal-card-title 删除项目
+          p.modal-card-title 删除工程
           button.delete(aria-label="close", v-on:click="isDelete = !isDelete")
-        section.modal-card-body 确定删除项目?
+        section.modal-card-body 确定删除工程?
         footer.modal-card-foot.pt20.pb20.pr20.pl20.has-background-white-ter
           button.button.is-danger(v-on:click="deleteProject()") 删除
           button.button(v-on:click="isDelete = !isDelete") 取消
@@ -97,13 +97,13 @@
           div.column.is-10.is-offset-1
             div.card.events-card
               header.card-header
-                p.card-header-title {{ items.length }} 项目
+                p.card-header-title {{ items.length }} 工程
 
                 div.field.card-header-icon
                   div.control
                     div.select
                       select(v-model="selected")
-                        option(selected) 所有项目
+                        option(selected) 所有工程
                         option 文本分类
                         option 序列标注
                         option Seq2seq
@@ -155,7 +155,7 @@ export default {
     isActive: false,
     isDelete: false,
     project: null,
-    selected: '所有项目',
+    selected: '所有工程',
     projectName: '',
     description: '',
     projectType: '',
@@ -172,7 +172,7 @@ export default {
 
   computed: {
     selectedProjects() {
-      return this.items.filter(item => this.selected === '所有项目' || this.matchType(item.project_type));
+      return this.items.filter(item => this.selected === '所有工程' || this.matchType(item.project_type));
     },
   },
 
