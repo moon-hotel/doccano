@@ -7,11 +7,11 @@
     <div class="column is-4 is-offset-4">
       <div class="box has-text-left">
         {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <p>用户名或密码不匹配，请重新输入！</p>
         {% endif %} {% if next %} {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+        <p>你的账号没有进入该页面的权限，请使用管理员账户！</p>
         {% else %}
-        <p>Please login to see this page.</p>
+        <p>登陆后才能查看该页面！</p>
         {% endif %} {% endif %}
 
         <form method="post" action="{% url 'login' %}">
@@ -50,7 +50,8 @@
           {% if allow_signup %}
           <div class="field">
             <span class="checkbox" style="margin-top:10px">
-              Not registered yet ? <a href="{% url 'signup' %}"> Sign up </a>
+             没有账户请联系管理员进行开通！
+{#                <a href="{% url 'signup' %}"> Sign up </a>#}
             </span>
           </div>
           {% endif %}

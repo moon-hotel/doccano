@@ -9,12 +9,12 @@
           div.columns.is-multiline
             div.column
               b-field(
-                label="人员名称"
+                label="用户名"
                 v-bind:type="{ 'is-danger': getAddUserMessage }"
                 v-bind:message="getAddUserMessage"
               )
                 b-select(
-                  placeholder="e.g. 张三"
+                  placeholder="e.g. 空字符"
                   v-model="newRoleMapping.username"
                   v-on:input="option => {checkValidExistingUser(option);\
                     newRoleMapping.userid = option}"
@@ -23,9 +23,9 @@
                     | {{ otherUser.username }}
 
             div.column
-              b-field(label="人员角色")
+              b-field(label="权限分配")
                 b-select(
-                  placeholder="选择一种角色"
+                  placeholder="选择权限"
                   v-model="newRoleMapping.roleid"
                 )
                   option(v-for="role in roles", v-bind:value="role.id", v-bind:key="role.id")
@@ -46,9 +46,9 @@
     div.card
       b-table(v-bind:data="roleMappings", icon-pack="fas", default-sort="username", striped=true)
         template(slot-scope="props")
-          b-table-column(field="username", label="人员名称", sortable="")
+          b-table-column(field="username", label="用户名", sortable="")
             | {{ props.row.username }}
-          b-table-column(field="rolename", label="人员角色", sortable="")
+          b-table-column(field="rolename", label="权限", sortable="")
             b-dropdown(aria-role="list")
               button.button.is-primary(slot="trigger")
                 span {{ props.row.rolename }}
