@@ -376,6 +376,23 @@ Unable to round-trip http request to upstream: dial tcp 124.71.156.219:8000: con
 {"id": 13, "text": "doccano是一个面向人类的开源文本标注工具。它为文本分类、序列标记和序列到序列任务提供注释功能。因此，您可以为情感分析、命名实体识别、文本摘要等创建标注数据。", "meta": {}, "annotation_approver": null, "labels": [[0, 7, "名词"], [12, 15, "形容词"], [19, 23, "名词"], [26, 30, "名词"], [62, 68, "名词"], [57, 61, "名词"], [69, 73, "名词"]]}
 ```
 
+### 4.5 重置密码
+
+由于Doccano的后台管理系统是基于Django框架的，所以如果你不小心忘记了管理员（admin）的密码，那么你可以按照如下方法来进行重置。
+
+- 进入`./app`目录，并执行`python manage.py shell`命令
+
+- 然后输入以下代码进行重置
+
+  ```python
+  from django.contrib.auth.models import User
+  user = User.objects.get(username='admin')
+  user.set_password('这里输入admin的新密码')
+  user.save()
+  ```
+
+- 然后以新密码重新登录即可。
+
 ## 5 引用
 
 ```tex
@@ -392,3 +409,7 @@ Unable to round-trip http request to upstream: dial tcp 124.71.156.219:8000: con
   year={2018},
 }
 ```
+
+## 6 帮助
+
+如果你按照上述步骤依旧无法部署成功，那么可以搜索笔者微信`nulls8`添加好友进行咨询。
