@@ -13,7 +13,9 @@ doccano是一个面向人类的开源文本注释工具。它为文本分类、�
 
 ## 2 演示
 
-你可以点击这里查看演示项目 [annotation demo](http://doccano.herokuapp.com).
+你可以点击这里查看演示项目 [点击](http://121.4.212.150:8000/).
+
+关注公众号“月来客栈”回复doccano可获得试用账号！
 
 ![Demo image](./docs/images/demo/demo.gif)
 
